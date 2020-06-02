@@ -1,34 +1,38 @@
-package com.webapp.springbootrestapiwebclient.entity;
+package com.webapp.springbootrestapiwebclient.response;
 
-import java.io.Serializable;
 import java.util.Date;
+
+
 import java.util.List;
 
-public class Customer implements Serializable {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class CustomerResponse {
 
+	@JsonProperty("customerId")
 	private int customerId;
 
+	@JsonProperty("customerName")
 	private String customerName;
 
+	@JsonProperty("dateOfBirth")
 	private Date dateOfBirth;
 
+	@JsonProperty("gender")
 	private String gender;
 
-	private List<Document> document;
+	@JsonProperty("document")
+	private List<DocumentResponse> document;
 
-	private List<Account> account;
+	@JsonProperty("account")
+	private List<AccountResponse> account;
 
-	public Customer() {
+	public CustomerResponse() {
 		super();
 	}
 
-	public Customer(int customerId, String customerName, Date dateOfBirth, String gender, List<Document> document,
-			List<Account> account) {
+	public CustomerResponse(int customerId, String customerName, Date dateOfBirth, String gender,
+			List<DocumentResponse> document, List<AccountResponse> account) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
@@ -70,20 +74,20 @@ public class Customer implements Serializable {
 		this.gender = gender;
 	}
 
-	public List<Document> getDocument() {
+	public List<DocumentResponse> getDocument() {
 		return document;
 	}
 
-	public void setDocument(List<Document> document) {
+	public void setDocument(List<DocumentResponse> document) {
 		this.document = document;
 	}
 
-	public List<Account> getAccount() {
+	public List<AccountResponse> getAccount() {
 		return account;
 	}
 
-	public void setAccount(List<Account> account) {
-		this.account = account;
+	public void setAccount(List<AccountResponse> accounts) {
+		this.account = accounts;
 	}
 
 	@Override

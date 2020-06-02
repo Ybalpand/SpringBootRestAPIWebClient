@@ -18,8 +18,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webapp.springbootrestapiwebclient.entity.Account;
+import com.webapp.springbootrestapiwebclient.entity.Customer;
 import com.webapp.springbootrestapiwebclient.exception.AccountNotFoundException;
+import com.webapp.springbootrestapiwebclient.response.AccountResponse;
+import com.webapp.springbootrestapiwebclient.response.CustomerResponse;
 import com.webapp.springbootrestapiwebclient.service.AccountService;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RequestMapping("/springbootrestapiwebclient/account")
 @RestController
@@ -28,6 +34,18 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 
+	@GetMapping("/getCustomerInfo")
+	@ResponseStatus(HttpStatus.OK)
+	public Customer getCustomerByInfo(@RequestParam (name = "customerId", required = false)  Integer customerId ){
+		List<Account> accounts = accountService.getAccountByCustomerId(customerId);
+		Customer customerInfo = WebClientController.getCustomerByInfo(customerId);
+		customerInfo.setAccount(accounts);		
+		return customerInfo;
+	}
+	
+	
+	
+	
 	// 1 get All Account List
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)

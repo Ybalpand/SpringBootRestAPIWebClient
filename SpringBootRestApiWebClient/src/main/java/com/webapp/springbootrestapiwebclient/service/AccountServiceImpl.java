@@ -1,7 +1,6 @@
 package com.webapp.springbootrestapiwebclient.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +15,18 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	AccountRepository accountRepository;
 
+	/* Webclient through Communiction Methods call */
+	
 	@Override
-	// getting all accounts record by using the method findaAll() of
-	// accountRepository
+	public List<Account> getAccountByCustomerId(Integer customerId) {
+		return accountRepository.getAccountByCustomerId(customerId);
+	}
+	
+	
+	/* account information CRUD operation */
+	
+	@Override
+	// getting all accounts record by using the method findaAll() of accountRepository
 	public List<Account> getAllAccountList() {
 		return accountRepository.findAll();
 	}
@@ -27,7 +35,7 @@ public class AccountServiceImpl implements AccountService {
 	// getting a specific record by using the method findById() of accountRepository
 	public Account getAccountById(Integer accountId) {
 		return accountRepository.findById(accountId)
-				.orElseThrow(() -> new AccountNotFoundException("Account not found :: " + accountId));
+				.orElseThrow(() -> new AccountNotFoundException("Account is not found :: " + accountId));
 	}
 
 	@Override
@@ -43,8 +51,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	// deleting a specific record by using the method deleteById() of
-	// accountRepository
+	// deleting a specific record by using the method deleteById() of accountRepository
 	public void deleteAccount(Integer accountId) {
 		accountRepository.deleteById(accountId);
 	}
@@ -66,5 +73,6 @@ public class AccountServiceImpl implements AccountService {
 		accountRepository.activateAccount(accountId);
 		return true;
 	}
+
 
 }

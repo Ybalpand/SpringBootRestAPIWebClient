@@ -1,22 +1,28 @@
-package com.webapp.springbootrestapiwebclient.entity;
+package com.webapp.springbootrestapiwebclient.response;
 
 import java.util.Date;
 
-public class Document {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class DocumentResponse {
+
+	@JsonProperty("documentId")
 	private int documentId;
 
+	@JsonProperty("documentName")
 	private String documentName;
 
+	@JsonProperty("documentExpiryDate")
 	private Date documentExpiryDate;
 
+	@JsonProperty("documentAddress")
 	private String documentAddress;
 
-	public Document() {
+	public DocumentResponse() {
 		super();
 	}
 
-	public Document(int documentId, String documentName, Date documentExpiryDate, String documentAddress) {
+	public DocumentResponse(int documentId, String documentName, Date documentExpiryDate, String documentAddress) {
 		super();
 		this.documentId = documentId;
 		this.documentName = documentName;
